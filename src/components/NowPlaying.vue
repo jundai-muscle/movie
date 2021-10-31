@@ -1,43 +1,36 @@
 <template>
-<div id="home">
-<v-list  class="overflow-y-auto"
-        max-height="94%"
-        max-width="90%">
-    <v-container>
-        
-        <v-row>
-            <draggable></draggable>
-            <v-col cols="12"  sm="6" md="4" lg="3" v-for="(item,i) in this.movies[0]" :key="i">
-                <v-list-item>
-                <v-img v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" @click="openModal(item)" :id="'item'+i" ></v-img>
-                </v-list-item>
-                <movieModal :movie="postItem" v-show="showContent" @close="closeModal"></movieModal>
-            </v-col>
-        </v-row>
-    </v-container>
-    <v-pagination
-        id="pagenation"
-        v-model="page"
-      :length="totalpage"
-      :total-visible="7"
-      @input="selectPage"
-    ></v-pagination>
-</v-list>
-</div>
+    <div id="home">
+        <v-container style="overflow:scroll;"
+                max-height="54%"
+                max-width="90%">
+                <v-row>
+                    <v-col cols="12"  sm="6" md="6" lg="3" v-for="(item,i) in this.movies[0]" :key="i" style="width:80%;">
+                        <v-img v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" @click="openModal(item)" :id="'item'+i"  style="width:80%;"></v-img>
+                        <movieModal :movie="postItem" v-show="showContent" @close="closeModal"></movieModal>
+                    </v-col>
+                </v-row>
+            <v-pagination
+                id="pagenation"
+                v-model="page"
+            :length="totalpage"
+            :total-visible="7"
+            @input="selectPage"
+            ></v-pagination>
+        </v-container>
+    </div>
 </template>
 
 
 <script>
 import axios from 'axios'
 import movieModal from '@/components/Modal.vue'
-import draggable from 'vuedraggable'
+
 
 
 export default {
     name:'home',
     components:{
         movieModal,
-        draggable
     },
     data(){
         return{
