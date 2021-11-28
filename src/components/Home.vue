@@ -1,11 +1,11 @@
 <template>
 <div >
-    <v-app id="home">
+    <v-app id="homepage">
         <v-btn-toggle multiple>
             <v-btn @click="favorite">お気に入り</v-btn>
             <v-btn @click="interest">気になる</v-btn>
         </v-btn-toggle>
-        <div >
+        <div style="width:80%">
             <component :is="currentComp"></component>
         </div>
     </v-app>
@@ -41,7 +41,7 @@ export default{
 
 </script>
 <style scoped>
-#home{
+#homepage{
     position:absolute;
     left:200px;
     top:15%;

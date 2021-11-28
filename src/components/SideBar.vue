@@ -1,6 +1,6 @@
 
 <template>
-<div  id="sidebar">
+<div  id="sidebar" style="position: fixed">
     <v-card
     height="100%"
     width="200"
@@ -36,7 +36,7 @@
           <v-list-item-content >
             <v-list-item-title class="text-h5" >
                 <router-link :to="{path:item.link}" 
-                style="color:white;text-decoration:none">
+                style="color:brack;text-decoration:none">
                     {{ item.title }}
                 </router-link>
             </v-list-item-title>

@@ -1,9 +1,9 @@
 <template>
-<div id="overlay">
+<div id="overlay" >
     <div id="content">
         <v-card>
-            <v-img v-bind:src="'http://image.tmdb.org/t/p/w780/'+ movie.poster_path" max-height="100%" max-width="50%" id="img"></v-img>
-            <p>{{movie.title}}</p>
+            <v-img v-bind:src="'http://image.tmdb.org/t/p/w780/'+ movie.poster_path" max-height="100%" max-width="50%" id="img" style="top:10px"></v-img>
+            <p style="padding-top:10px">{{movie.title}}</p>
             <p>{{movie.overview}}</p>
         <v-btn @click="close">close</v-btn>
     </v-card>

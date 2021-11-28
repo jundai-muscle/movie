@@ -1,5 +1,5 @@
 <template>
-<div id="movieapp">
+<div id="movieapp" >
   <v-app>
     <MovieSearch></MovieSearch>
     <SideBar></SideBar>
@@ -31,5 +31,9 @@ export default {
 #search {
   position:absolute;
   right: 0px;
+}
+
+.container{
+  background-color:black;
 }
 </style>

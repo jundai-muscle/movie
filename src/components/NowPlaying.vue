@@ -1,12 +1,10 @@
-<template>
-    <div id="home">
-        <v-container style="overflow:scroll;"
-                max-height="54%"
-                max-width="90%">
+<template >
+    <div id="now" style="width: 80%; height;100px;">
+        <v-container style="overflow:scroll;">
                 <v-row>
-                    <v-col cols="12"  sm="6" md="6" lg="3" v-for="(item,i) in this.movies[0]" :key="i" style="width:80%;">
+                    <v-col cols="12"  sm="6" md="4" lg="3" v-for="(item,i) in this.movies[0]" :key="i" style="width:80%;">
                         <v-img v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" @click="openModal(item)" :id="'item'+i"  style="width:80%;"></v-img>
-                        <movieModal :movie="postItem" v-show="showContent" @close="closeModal"></movieModal>
+                        <movieModal :movie="postItem" v-show="showContent" @close="closeModal" style="left:10%;"></movieModal>
                     </v-col>
                 </v-row>
             <v-pagination
@@ -40,7 +38,6 @@ export default {
             postItem:"",
             totalpage:0,
             page:1
-            
         }
     },
     created(){
@@ -51,6 +48,7 @@ export default {
             this.totalpage=res.data.total_pages
             //console.log(this.movies[0][0])
             //this.$router.push(`/result/${this.keyword}`)
+            console.log(res)
         })
         .catch((e)=>{
             alert(e);
@@ -74,17 +72,15 @@ export default {
             .catch((e)=>{
                 alert(e);
             })
-            window.scrollTo({
-                top:0,
-                behavior:"smooth"
-            })
+            document.getElementById('now').scrollIntoView({behavior:'smooth'})
+            //document.getElementById('search').scrollIntoView({behavior:'smooth'})
         }
 
     }
 }
 </script>
 <style scoped>
-#home{
+#now{
     position:absolute;
     left:200px;
     top:90px;
