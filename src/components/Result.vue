@@ -60,7 +60,6 @@ export default {
         .then((res)=>{
             this.movies=[]
             this.movies.push(res.data.results)
-            console.log(res)
             this.totalpage=res.data.total_pages
             //this.$router.push(`/result/${this.keyword}`)
         })
