@@ -1,10 +1,16 @@
 <template >
-    <div id="now" style="width: 80%; height;100px;">
-        <v-container style="overflow:scroll;">
+    <div id="now" style="width: 80%; margin-top:100px;">
+        <v-container style="overflow:scroll;" fluid >
                 <v-row>
                     <v-col cols="12"  sm="6" md="4" lg="3" v-for="(item,i) in this.movies[0]" :key="i" style="width:80%;">
-                        <v-img v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" @click="openModal(item)" :id="'item'+i"  style="width:80%;"></v-img>
-                        <movieModal :movie="postItem" v-show="showContent" @close="closeModal" style="left:10%;"></movieModal>
+                        <v-dialog transition="dialog-top-transition" max-width="600">
+                            <template v-slot:activator="{on,attrs}" v-if="item.poster_path"> 
+                            <v-img  :key="i" v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" :id="'item'+i"  style="width:80%;" v-bind="attrs" v-on="on" @click="openModal(item)"></v-img>
+                            </template>
+                            <template v-slot:default="dialog">
+                                <movieModal :movie="postItem" v-show="showContent" @close="dialog.value=false" :value="dialog"></movieModal>
+                            </template>
+                        </v-dialog>
                     </v-col>
                 </v-row>
             <v-pagination
@@ -72,22 +78,11 @@ export default {
             .catch((e)=>{
                 alert(e);
             })
-            document.getElementById('now').scrollIntoView({behavior:'smooth',inline:'start'})
+            document.getElementById('now').scrollIntoView({behavior:'smooth'})
             //document.getElementById('search').scrollIntoView({behavior:'smooth'})
         }
 
     }
 }
 </script>
-<style scoped>
-#now{
-    position:absolute;
-    left:200px;
-    top:90px;
-    height:93%;
-    width:90%;
-}
-#pagenation{
-    z-index:10;
-}
-</style>
+

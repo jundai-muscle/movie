@@ -1,25 +1,27 @@
-<template>
-<div id="result">
-<v-card v-scroll.self class="overflow-y-auto flexcard" height="94%" width="87%">
-    <v-container>
-        <v-row>
-            <v-col cols="12"  sm="3" md="3" lg="3" v-for="(item,i) in this.movies[0]" :key="i">
-                <v-card>
-                <v-img v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" @click="openModal(item)" :id="'item'+i" ></v-img>
-                </v-card>
-                <movieModal :movie="postItem" v-show="showContent" @close="closeModal"></movieModal>
-            </v-col>
-        </v-row>
-    </v-container>
-    <v-pagination
-        id="pagenation"
-        v-model="page"
-      :length="totalpage"
-      :total-visible="7"
-      @input="selectPage"
-    ></v-pagination>
-</v-card>
-</div>
+<template >
+    <div id="now" style="width: 80%; margin-top:100px;">
+        <v-container style="overflow:scroll;" fluid >
+                <v-row>
+                    <v-col cols="12"  sm="6" md="4" lg="3" v-for="(item,i) in this.movies[0]" :key="i" style="width:80%;">
+                        <v-dialog transition="dialog-top-transition" max-width="600">
+                            <template v-slot:activator="{on,attrs}">
+                            <v-img :key="i" v-bind:src="'http://image.tmdb.org/t/p/w300/'+ item.poster_path" :id="'item'+i"  style="width:80%;" v-bind="attrs" v-on="on" @click="openModal(item)"></v-img>
+                            </template>
+                            <template v-slot:default="dialog">
+                                <movieModal :movie="postItem" v-show="showContent" @close="dialog.value=false" :value="dialog"></movieModal>
+                            </template>
+                        </v-dialog>
+                    </v-col>
+                </v-row>
+            <v-pagination
+                id="pagenation"
+                v-model="page"
+            :length="totalpage"
+            :total-visible="7"
+            @input="selectPage"
+            ></v-pagination>
+        </v-container>
+    </div>
 </template>
 
 
@@ -92,13 +94,5 @@ export default {
 
 }
 </script>
-<style scoped>
-#result{
-    position:absolute;
-    left:220px;
-    top:100px;
-    height:91%;
-    width:90%;
-    margin-bottom:20px;
-}
-</style>
+
+
